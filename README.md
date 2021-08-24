@@ -1,4 +1,4 @@
-# SeleriumFirstProject
+# SeleniumFirstProject
 ## Used Selenium framework for authomtion testing:
 ### 1. Navigate to amazon.com
 ### 2. Search for “selenium cookbook”
