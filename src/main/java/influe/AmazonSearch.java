@@ -10,8 +10,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import influe.WebDriverSettings.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class AmazonSearch  {
 
@@ -28,7 +31,14 @@ public class AmazonSearch  {
         String searchText = "selenium cookbook";
 
         driver.get("https://www.amazon.com");
-        driver.findElement(By.id("twotabsearchtextbox")).sendKeys(searchText);
+
+        WebElement waitSearch = new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.id("twotabsearchtextbox")));
+        //explicit wait
+        //wait unit input field loaded to avoid no such element exception
+        //WebDriverWait was deprecated! Does it okay?
+
+        waitSearch.sendKeys(searchText);
+
         driver.findElement(By.id("nav-search-submit-button")).click();
 
         String searchTestResule = driver.findElement(By.xpath("//span[@class='a-color-state a-text-bold']")).getText();
@@ -51,7 +61,9 @@ public class AmazonSearch  {
             ans += newDollar + (newCent / 100);
         }
         System.out.println("Sum: $"+  ans);
-        Thread.sleep(10000);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // this is implicit wait,
+
+
     }
 
     @After

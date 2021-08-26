@@ -37,12 +37,12 @@ public class createPet {
         Map<String, Object> tag2 = new HashMap<>();
         tag2.put("id", 2);
         tag2.put("name", "someTag");
-        List<Map<String,Object>> tagsSet = Arrays.asList(tag1, tag2);
+        List<Map<String, Object>> tagsSet = Arrays.asList(tag1, tag2);
 
         request.put("tags", tagsSet);
 
         request.put("status", "Someting");
-        System.out.println("REQUEST"+request);
+        System.out.println("REQUEST" + request);
 
         baseURI = "https://petstore.swagger.io/v2";
         given().
@@ -52,6 +52,11 @@ public class createPet {
                 body(request.toJSONString()).when().
                 post("/pet").then().statusCode(200).log().all();
 
+    }
 
+    @Test
+    public void deletePet(){
+        baseURI = "https://petstore.swagger.io/v2";
+        when().delete("/pet/5").then().statusCode(200).log().all();
     }
 }
