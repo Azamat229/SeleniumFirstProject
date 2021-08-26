@@ -1,12 +1,14 @@
 package influe;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import influe.WebDriverSettings.*;
@@ -15,6 +17,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class AmazonSearch  {
 
@@ -45,10 +49,15 @@ public class AmazonSearch  {
         searchTestResule = searchTestResule.substring(1, searchTestResule.length() - 1);
 
 
-        if (Objects.equals(searchTestResule, searchText))
+        Assertions.assertEquals(searchTestResule, searchText);
+
+        if (Objects.equals(searchTestResule, searchText)) {
             logger.info("Locate in expected page");
-        else
+            Assertions.assertTrue(true);
+        } else {
             logger.error("Search result isn't equal to request " + searchTestResule + " != " + searchText);
+            Assertions.fail();
+        }
         Thread.sleep(1000);
 
         dollar = (ArrayList<WebElement>) driver.findElements(By.xpath("//div[@class=\"a-section a-spacing-none a-spacing-top-small\"]//span[@class=\"a-price\"]//span[@class=\"a-price-whole\"]"));//*[contains(@class,'a-offscreen')]
