@@ -50,7 +50,7 @@ public class AmazonSearch  {
             double newCent = Double.parseDouble(cent.get(i).getText());
             ans += newDollar + (newCent / 100);
         }
-        System.out.println(ans);
+        System.out.println("Sum: $"+  ans);
         Thread.sleep(10000);
     }
 
