@@ -68,11 +68,12 @@ public class AmazonSearch  {
         System.out.println("Sum: $"+  ans);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // this is implicit wait,
 
-
-    }
-
-    @After
-    public void close() {
         driver.quit();
+
     }
+
+//    @After
+//    public void close() {
+//
+//    }
 }
