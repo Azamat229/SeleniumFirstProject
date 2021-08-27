@@ -1,15 +1,18 @@
 package rest_assured;
 
 import io.restassured.http.ContentType;
-import org.json.simple.JSONObject;
-import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static io.restassured.RestAssured.*;
+import org.json.simple.JSONObject;
+import org.junit.jupiter.api.Test;
+
+import static io.restassured.RestAssured.baseURI;
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 
 public class createPet {
 
@@ -20,16 +23,10 @@ public class createPet {
         int id = 5;
 
         baseURI = "https://petstore.swagger.io/v2";
-        given().
-                header("Content-Type", "application/json").
-                contentType(ContentType.JSON).
-                accept(ContentType.JSON).
-                body("").when().
-                get("/pet/" + id).then().statusCode(200).log().all();
+        given().header("Content-Type", "application/json").contentType(ContentType.JSON).accept(ContentType.JSON).body("").when().get("/pet/" + id).then().statusCode(200).log().all();
     }
 
-
-    //POST
+    // POST
     @Test
     public void testPost() {
         JSONObject request = new JSONObject();
@@ -62,16 +59,10 @@ public class createPet {
         System.out.println("REQUEST" + request);
 
         baseURI = "https://petstore.swagger.io/v2";
-        given().
-                header("Content-Type", "application/json").
-                contentType(ContentType.JSON).
-                accept(ContentType.JSON).
-                body(request.toJSONString()).when().
-                post("/pet").then().statusCode(200).log().all();
+        given().header("Content-Type", "application/json").contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).when().post("/pet").then().statusCode(200).log().all();
     }
 
-
-    //Put
+    // Put
     @Test
     public void testPut() {
         JSONObject request = new JSONObject();
@@ -103,16 +94,11 @@ public class createPet {
         System.out.println("REQUEST" + request);
 
         baseURI = "https://petstore.swagger.io/v2";
-        given().
-                header("Content-Type", "application/json").
-                contentType(ContentType.JSON).
-                accept(ContentType.JSON).
-                body(request.toJSONString()).when().
-                put("/pet").then().statusCode(200).log().all();
+        given().header("Content-Type", "application/json").contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).when().put("/pet").then().statusCode(200).log().all();
 
     }
 
-    //Delete
+    // Delete
     @Test
     public void deletePet() {
         baseURI = "https://petstore.swagger.io/v2";
