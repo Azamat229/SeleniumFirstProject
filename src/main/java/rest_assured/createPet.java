@@ -1,7 +1,10 @@
 package rest_assured;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 import org.json.simple.JSONObject;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -9,15 +12,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.baseURI;
+import static io.restassured.RestAssured.given;
 
 public class createPet {
+
+    Response response;
 
     // GET
     @Test
     public void testGet() {
 
-        int id = 5;
+        int id = 1;
 
         baseURI = "https://petstore.swagger.io/v2";
         given().
@@ -112,11 +118,26 @@ public class createPet {
 
     }
 
-    //Delete
+//    //Delete
+//    @Test
+//    public void deletePet() {
+//        baseURI = "https://petstore.swagger.io/v2";
+//        when().delete("/pet/5").then().statusCode(200).log().all();
+//
+//    }
+
     @Test
-    public void deletePet() {
+    public void getResponse() {
         baseURI = "https://petstore.swagger.io/v2";
-        when().delete("/pet/5").then().statusCode(200).log().all();
+
+        response = given().accept(ContentType.JSON).when().get("/pet/5");
+        response.then().statusCode(200);
+        ResponseBody body = response.getBody();
+        Pet pet = body.as(Pet.class);
+        Assertions.assertEquals(pet.getId(), 5);
+        Assertions.assertEquals(pet.getName(), "San");
+        Assertions.assertEquals(pet.getStatus(), "Someting");
+
 
     }
 
